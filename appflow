@@ -1,0 +1,49 @@
+- datasource: s3,file
+  bucketname:
+  prefixkey:
+  path:
+- filereader:
+    linetokenizer:
+      field: "customerid"
+        position: 0
+        length: 4
+      field: "name"
+        position: 5
+        length: 10
+  delimiter: ","
+  skiplines: 1
+  rowmapper: readermodel
+  commitsize: 10000
+
+- processor:
+
+- filewriter:
+  rowwritter:
+    linetokenizer:
+      field: "customerid"
+        position: 0
+        length: 4
+      field: "name"
+        position: 5
+        length: 10
+  delimiter: ","
+  header:
+    fields:
+      field: "customerid"
+      position: 0
+      length: 4
+      field: "name"
+      position: 5
+      length: 10
+    rowmapper: headermodel
+  footer:
+    fields:
+      field: "customerid"
+      position: 0
+      length: 4
+      field: "name"
+      position: 5
+      length: 10
+    rowmapper: fottermodel
+  rowmapper: writermodel
+  commitsize: 10000
