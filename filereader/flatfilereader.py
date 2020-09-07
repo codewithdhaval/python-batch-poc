@@ -1,6 +1,3 @@
-
-
-
 class FileItemReader:
     """
     lineMapper maps line to model

@@ -1,3 +1,6 @@
+from fileparser.fileparser import FileConfigParser
+
+
 class RunBatchFramework:
     """
     Parses the config file and creates batch environment
@@ -17,7 +20,6 @@ class RunBatchFramework:
 
 
 if __name__ == "__main__":
-    runbatch = RunBatchFramework("filepath")
-    runbatch.parseinputfile()
-    runbatch.processfile()
-    runbatch.persistdata()
+    #runbatch = RunBatchFramework("./appflow.yaml")
+    parser = FileConfigParser("./appflow.yaml")
+    configmodel = parser._parseconfigfile()

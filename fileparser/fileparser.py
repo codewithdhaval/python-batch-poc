@@ -1,8 +1,11 @@
+import yaml
 
 
-class FileParses:
-    def __init__(self, fileparser: str):
-        self.fileparser = fileparser
+class FileConfigParser:
+    def __init__(self, configfile_relativepath: str):
+        self.configfile_relativepath = configfile_relativepath
 
-    def  _parsefile(self):
-        print("Extract file contents to model")
+    def _parseconfigfile(self):
+        with open(self.configfile_relativepath) as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+            print(data)
