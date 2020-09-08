@@ -11,7 +11,7 @@ class FileTransformer:
     def _transform(self, listofitems: list) -> list:
         listoffilteredtems = []
         for item in listofitems:
-            tokens = item.split(self.configmodel.delimiter)
+            tokens = item.split(self.configmodel.delimiter) # create a method and do data check
             class_ = getattr(module_, self.configmodel.rowmappermodel)(tokens)
             listoffilteredtems.append(class_)
         return listoffilteredtems

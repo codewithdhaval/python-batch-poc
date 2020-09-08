@@ -4,6 +4,10 @@ from fileparser.configmodel import ParseFileModel
 
 
 class FileConfigParser:
+    """
+    Parses the appconfig file
+    create a model that stores all the information about parsing the file
+    """
     def __init__(self, configfile_relativepath: str):
         self.configfile_relativepath = configfile_relativepath
 
@@ -26,7 +30,7 @@ class FileConfigParser:
                                 print(f"SkipLines ::{items[filereaderkey][key]}")
                                 skiplines = items[filereaderkey][key]
                             if key == "comitsize":
-                                print(f"SkipLines ::{items[filereaderkey][key]}")
+                                print(f"comitsize ::{items[filereaderkey][key]}")
                                 comitsize = items[filereaderkey][key]
                             if key == "rowmappermodel":
                                 print(f"rowmappermodel ::{items[filereaderkey][key]}")

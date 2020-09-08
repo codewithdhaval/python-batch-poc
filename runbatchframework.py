@@ -14,7 +14,7 @@ class RunBatchFramework:
         self.configmodel = None
 
     def createconfigmodel(self) -> configmodel:
-        parser = FileConfigParser("./appflow.yaml")
+        parser = FileConfigParser("./appconfig.yaml")
         self.configmodel = parser._parseconfigfile()
 
     def readfile(self) -> list:
@@ -25,8 +25,8 @@ class RunBatchFramework:
         transformresults = FileTransformer(self.configmodel)
         return transformresults._transform(listofitems)
 
-    def process(self) -> None:
-        print("call DAO")
+    def process(self, listoftransformeditems: list) -> list:
+        print("Logical changes on items from file")
 
     def persistdata(self) -> None:
         print("call DAO")
@@ -37,3 +37,5 @@ if __name__ == "__main__":
     runbatch.createconfigmodel()
     listofitems = runbatch.readfile()
     listoffiltereditems = runbatch.transform(listofitems)
+    for item in listoffiltereditems:
+        print(f"Name -{item.name}, City - {item.city}, Salary - {item.salary}")
