@@ -7,10 +7,10 @@ class BatchFileSource:
 
 
 class ParseFileModel:
-    def __init__(self, delimiter: str, linetokenizer: str, skiplines: str, comitsize: str, rowmapper):
-        print("::::::: ParseFile Model :::::::")
+    def __init__(self, delimiter: str, linetokenizer: str, skiplines: str, comitsize: str, rowmappermodel: str):
+        # print("::::::: ParseFile Model :::::::")
         self.delimiter = delimiter
-        self.lineokenizer = linetokenizer
+        self.linetokenizer = linetokenizer
         self.skiplines = skiplines
         self.comitsize = comitsize
-        self.rowmapper = rowmapper
+        self.rowmappermodel = rowmappermodel

@@ -1,0 +1,7 @@
+[dev-packages]
+
+[packages]
+pyyaml = "*"
+
+[requires]
+python_version = "3.8"

@@ -30,8 +30,7 @@ class FileConfigParser:
                                 comitsize = items[filereaderkey][key]
                             if key == "rowmappermodel":
                                 print(f"rowmappermodel ::{items[filereaderkey][key]}")
-                                module_ = importlib.import_module("rowmapper.rowmapmodel")
-                                class_ = getattr(module_, items[filereaderkey][key])()
+                                rowmappermodel = items[filereaderkey][key]
 
-                        fileparsemodel = ParseFileModel(delimiter, linetokenizer, skiplines, comitsize, class_)
+                        fileparsemodel = ParseFileModel(delimiter, linetokenizer, skiplines, comitsize, rowmappermodel)
         return fileparsemodel

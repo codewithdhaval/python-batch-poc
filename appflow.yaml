@@ -1,0 +1,10 @@
+- datasource: s3,file
+  bucketname:
+  prefixkey:
+  path:
+- filereader:
+    linetokenizer: "1,3,4"
+    delimiter: "|"
+    skiplines: 1
+    rowmappermodel: RowMapModel
+    comitsize: 10000
