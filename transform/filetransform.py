@@ -1,5 +1,5 @@
 import importlib
-from fileparser.configmodel import ParseFileModel
+from appconfigmodel import ParseFileModel
 
 module_ = importlib.import_module("rowmapper.rowmapmodel")
 

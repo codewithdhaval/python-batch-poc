@@ -1,9 +1,8 @@
-import importlib
 import yaml
-from fileparser.configmodel import ParseFileModel
+from appconfigmodel import ParseFileModel
 
 
-class FileConfigParser:
+class AppConfigParser:
     """
     Parses the appconfig file
     create a model that stores all the information about parsing the file
@@ -11,7 +10,7 @@ class FileConfigParser:
     def __init__(self, configfile_relativepath: str):
         self.configfile_relativepath = configfile_relativepath
 
-    def _parseconfigfile(self) -> ParseFileModel:
+    def _parseappconfig(self) -> ParseFileModel:
         with open(self.configfile_relativepath) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             #print(data)
@@ -29,6 +28,9 @@ class FileConfigParser:
                             if key == "skiplines":
                                 print(f"SkipLines ::{items[filereaderkey][key]}")
                                 skiplines = items[filereaderkey][key]
+                            if key == "lastrecordprefix":
+                                print(f"SkipLines ::{items[filereaderkey][key]}")
+                                lastrecordprefix = items[filereaderkey][key]
                             if key == "comitsize":
                                 print(f"comitsize ::{items[filereaderkey][key]}")
                                 comitsize = items[filereaderkey][key]
@@ -36,5 +38,5 @@ class FileConfigParser:
                                 print(f"rowmappermodel ::{items[filereaderkey][key]}")
                                 rowmappermodel = items[filereaderkey][key]
 
-                        fileparsemodel = ParseFileModel(delimiter, linetokenizer, skiplines, comitsize, rowmappermodel)
+                        fileparsemodel = ParseFileModel(delimiter, linetokenizer, skiplines, lastrecordprefix, comitsize, rowmappermodel)
         return fileparsemodel

@@ -1,9 +1,10 @@
-from fileparser.configmodel import ParseFileModel
+from appconfigmodel import ParseFileModel
 
 
 class FileItemReader:
     """
     Reads records from the file
+    Applies filters and conditions from appconfig
     """
     def __init__(self, configmodel: ParseFileModel):
         self.configmodel = configmodel
@@ -16,6 +17,8 @@ class FileItemReader:
             for line in lines:
                 if self.skiplines(self.configmodel.skiplines):
                     continue
+                if self.islastrecord(self.configmodel.lastrecordprefix, line):
+                    return listofrefineditems
                 listofrefineditems.append(line)
         return listofrefineditems
 
@@ -24,3 +27,8 @@ class FileItemReader:
             return False
         self.lineskiptrack += 1
         return True
+
+    def islastrecord(self, recordprefix: str, line: str):
+        if line.startswith(recordprefix):
+            return True
+        return False
