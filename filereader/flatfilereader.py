@@ -1,20 +1,26 @@
+import importlib
+from typing import Any
+
+from fileparser.configmodel import ParseFileModel
+from rowmapper.rowmapmodel import RowMapModel
+
+
 class FileItemReader:
     """
     lineMapper maps line to model
     """
-    def __init__(self, linestoskip: str, lineMapper: str, arrayoflinestoskip: str):
-        self.linestoskip = linestoskip
-        self.arrayoflinestoskip = arrayoflinestoskip
+    def __init__(self, configmodel: ParseFileModel):
+        self.configmodel = configmodel
 
-    def doRead(self) -> None:
+    def _doRead(self) -> list:
         """
         return rowmapper model
         :return:
         """
-        # line = readline()
-        # line is header or footer or comment, skip it
-        print("Read the file- line by line")
+        listofrefineditems = []
+        with open("./associatedetails.dat", "r") as freader:
+            lines = freader.readlines()
+            for line in lines:
+                listofrefineditems.append(line)
+        return listofrefineditems
 
-    def mapline(self):
-        print("map the line to rowmapper")
-        # new rowmapper object and pass the delimited token in sequence

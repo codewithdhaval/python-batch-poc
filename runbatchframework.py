@@ -2,7 +2,8 @@ import importlib
 
 from fileparser import configmodel
 from fileparser.fileparser import FileConfigParser
-from rowmapper.rowmapmodel import RowMapModel
+from filereader.flatfilereader import FileItemReader
+from transform.filetransform import FileTransformer
 
 
 class RunBatchFramework:
@@ -16,17 +17,13 @@ class RunBatchFramework:
         parser = FileConfigParser("./appflow.yaml")
         self.configmodel = parser._parseconfigfile()
 
-    '''
-        def readfile(self) -> None:
-        filepath = self.inputfilepath
-        print("Parse input file ::"+filepath)
-    '''
+    def readfile(self) -> list:
+        fileiteamreader = FileItemReader(self.configmodel)
+        return fileiteamreader._doRead()
 
-    def transform(self, line: str) -> None:
-        tokens = line.split("|")
-        module_ = importlib.import_module("rowmapper.rowmapmodel")
-        class_ = getattr(module_, self.configmodel.rowmappermodel)(tokens)
-        return class_
+    def transform(self, listofitems: list) -> list:
+        transformresults = FileTransformer(self.configmodel)
+        return transformresults._transform(listofitems)
 
     def process(self) -> None:
         print("call DAO")
@@ -38,9 +35,5 @@ class RunBatchFramework:
 if __name__ == "__main__":
     runbatch = RunBatchFramework()
     runbatch.createconfigmodel()
-    with open("./associatedetails.dat", "r") as freader:
-        line = freader.readline()
-        while line != "":
-            linemapper = runbatch.transform(line)
-            print(f"{linemapper.name} - {linemapper.addr} - {linemapper.salary}")
-            line = freader.readline()
+    listofitems = runbatch.readfile()
+    listoffiltereditems = runbatch.transform(listofitems)
