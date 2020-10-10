@@ -2,6 +2,7 @@
 
 [packages]
 pyyaml = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.8"
