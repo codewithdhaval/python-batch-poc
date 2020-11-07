@@ -19,5 +19,16 @@ def multiply_columns(data):
     data['length_of_word'] = data['species'].apply(lambda x: len(x))
     return data
 
-iris = pd.DataFrame()
-iris = parallelize_dataframe(iris, multiply_columns)
+
+def read_file_in_chunk() -> None:
+    with open("myfile.txt") as fl:
+        for chunk in pd.read_csv(fl, delimiter="|", chunksize=100000):
+            df = pd.concat([chunk])
+            print(df.info())
+
+
+if __name__ == "__main__":
+    # iris = pd.DataFrame()
+    # iris = parallelize_dataframe(iris, multiply_columns)
+    read_file_in_chunk()
+
